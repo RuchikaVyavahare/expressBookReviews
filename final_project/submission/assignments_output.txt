@@ -1,0 +1,128 @@
+==================================================================
+TASK 1: githubrepo - Verify GitHub repository is forked
+==================================================================
+$ curl -s https://api.github.com/repos/RuchikaVyavahare/expressBookReviews
+
+{
+  "full_name": "RuchikaVyavahare/expressBookReviews",
+  "fork": true,
+  "parent_full_name": "ibm-developer-skills-network/expressBookReviews",
+  "parent_html_url": "https://github.com/ibm-developer-skills-network/expressBookReviews"
+}
+
+==================================================================
+TASK 2: getallbooks - Retrieve all books
+==================================================================
+$ curl -i http://localhost:5000/
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 744
+
+{"1":{"author":"Chinua Achebe","title":"Things Fall Apart","reviews":{}},"2":{"author":"Hans Christian Andersen","title":"Fairy tales","reviews":{}},"3":{"author":"Dante Alighieri","title":"The Divine Comedy","reviews":{}},"4":{"author":"Unknown","title":"The Epic Of Gilgamesh","reviews":{}},"5":{"author":"Unknown","title":"The Book Of Job","reviews":{}},"6":{"author":"Unknown","title":"One Thousand and One Nights","reviews":{}},"7":{"author":"Unknown","title":"Njál's Saga","reviews":{}},"8":{"author":"Jane Austen","title":"Pride and Prejudice","reviews":{}},"9":{"author":"Honoré de Balzac","title":"Le Père Goriot","reviews":{}},"10":{"author":"Samuel Beckett","title":"Molloy, Malone Dies, The Unnamable, the trilogy","reviews":{}}}
+
+==================================================================
+TASK 3: getbooksbyISBN - Retrieve book by ISBN
+==================================================================
+$ curl -i http://localhost:5000/isbn/1
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 67
+
+{"author":"Chinua Achebe","title":"Things Fall Apart","reviews":{}}
+
+==================================================================
+TASK 4: getbooksbyauthor - Retrieve books by author
+==================================================================
+$ curl -i http://localhost:5000/author/Austen
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 73
+
+{"8":{"author":"Jane Austen","title":"Pride and Prejudice","reviews":{}}}
+
+==================================================================
+TASK 5: getbooksbytitle - Retrieve books by title
+==================================================================
+$ curl -i "http://localhost:5000/title/Fairy%20tales"
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 77
+
+{"2":{"author":"Hans Christian Andersen","title":"Fairy tales","reviews":{}}}
+
+==================================================================
+TASK 6: getbookreview - Retrieve reviews for a book
+==================================================================
+$ curl -i http://localhost:5000/review/1
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 2
+
+{}
+
+==================================================================
+TASK 7: register - Register a new user
+==================================================================
+$ curl -i -X POST -H "Content-Type: application/json" -d '{"username":"kartikfinal","password":"pass1234"}' http://localhost:5000/register
+
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 42
+
+{"message":"User successfully registered"}
+
+==================================================================
+TASK 8: login - Log in as a registered user
+==================================================================
+$ curl -i -X POST -H "Content-Type: application/json" -d '{"username":"kartikfinal","password":"pass1234"}' http://localhost:5000/customer/login
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 202
+
+{"message":"Login successful","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImthcnRpa2ZpbmFsIiwiaWF0IjoxNzg4NDk2MjAwLCJleHAiOjE3ODg0OTk4MDB9.QLrR1x-hkE9sVR5gWcQWiwIuJKpvBoM_547ZmOANrWM"}
+
+==================================================================
+TASK 9: reviewadded - Add/modify a book review
+==================================================================
+Note: replace $TOKEN below with the "token" value received in Task 8's response.
+
+$ curl -i -X PUT -H "Authorization: Bearer $TOKEN" "http://localhost:5000/customer/auth/review/1?review=An%20amazing%20read%2C%20highly%20recommend!"
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 110
+
+{"message":"Review added/updated successfully","reviews":{"kartikfinal":"An amazing read, highly recommend!"}}
+
+==================================================================
+TASK 10: deletereview - Delete a book review
+==================================================================
+Note: replace $TOKEN below with the "token" value received in Task 8's response.
+
+$ curl -i -X DELETE -H "Authorization: Bearer $TOKEN" "http://localhost:5000/customer/auth/review/1"
+
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 54
+
+{"message":"Review deleted successfully","reviews":{}}
+
+==================================================================
+TASK 11: general.js GitHub URL
+==================================================================
+https://github.com/RuchikaVyavahare/expressBookReviews/blob/main/final_project/router/general.js
