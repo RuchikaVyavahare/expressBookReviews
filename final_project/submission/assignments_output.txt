@@ -85,7 +85,7 @@ Content-Length: 42
 ==================================================================
 TASK 8: login - Log in as a registered user
 ==================================================================
-$ curl -i -X POST -H "Content-Type: application/json" -d '{"username":"kartikfinal","password":"pass1234"}' http://localhost:5000/customer/login
+$ curl -i -X POST -H "Content-Type: application/json" -d '{"username":"ruchikafinal","password":"pass1234"}' http://localhost:5000/customer/login
 
 HTTP/1.1 200 OK
 X-Powered-By: Express
@@ -106,7 +106,7 @@ X-Powered-By: Express
 Content-Type: application/json; charset=utf-8
 Content-Length: 110
 
-{"message":"Review added/updated successfully","reviews":{"kartikfinal":"An amazing read, highly recommend!"}}
+{"message":"Review added/updated successfully","reviews":{"ruchikafinal":"An amazing read, highly recommend!"}}
 
 ==================================================================
 TASK 10: deletereview - Delete a book review
